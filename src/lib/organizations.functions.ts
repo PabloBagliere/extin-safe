@@ -53,13 +53,8 @@ async function activeMembership() {
 
 export const listMyOrganizations = createServerFn({ method: 'GET' }).handler(
   async () => {
-    const { getActiveOrganizationId, requireSession } =
-      await import('#/lib/auth.server')
+    const { requireSession } = await import('#/lib/auth.server')
     const currentSession = await requireSession()
-    const activeOrganizationId = await getActiveOrganizationId(
-      currentSession.session.id,
-    )
-
     return db
       .select({
         id: organizations.id,
@@ -67,7 +62,6 @@ export const listMyOrganizations = createServerFn({ method: 'GET' }).handler(
         type: organizations.type,
         role: organizationMembers.role,
         isActive: organizations.isActive,
-        selected: eq(organizations.id, activeOrganizationId ?? ''),
       })
       .from(organizationMembers)
       .innerJoin(
@@ -231,8 +225,7 @@ export const acceptOrganizationMemberInvitation = createServerFn({
 export const createMaintenanceRelationship = createServerFn({ method: 'POST' })
   .validator(z.object({ organizationId: z.string().uuid() }))
   .handler(async ({ data }) => {
-    const { currentSession, organizationId, membership } =
-      await activeMembership()
+    const { organizationId, membership } = await activeMembership()
     requireOrganizationAdmin(membership.role)
 
     const targetOrganizations = await db
