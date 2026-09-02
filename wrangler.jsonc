@@ -1,7 +1,48 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
-  "compatibility_date": "2025-09-02",
+  "name": "extin-safe",
+  "compatibility_date": "2026-09-02",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry"
+  "main": "@tanstack/react-start/server-entry",
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {
+    "APP_URL": "http://localhost:3000",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "extin-safe-dev",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "drizzle",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "extin-safe-media-dev",
+    },
+  ],
+  "env": {
+    "production": {
+      "vars": {
+        "APP_URL": "https://app.extinsafe.com.ar",
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "extin-safe-production",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "drizzle",
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA",
+          "bucket_name": "extin-safe-media-production",
+        },
+      ],
+    },
+  },
 }

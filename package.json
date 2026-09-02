@@ -13,14 +13,15 @@
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
     "check": "prettier --check .",
-    "deploy": "pnpm run build && wrangler deploy",
+    "deploy": "pnpm run build && wrangler deploy --env production",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push",
-    "db:pull": "drizzle-kit pull",
-    "db:studio": "drizzle-kit studio"
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "db:migrate:production": "wrangler d1 migrations apply DB --remote --env production",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.7.2",
     "@faker-js/faker": "^10.3.0",
     "@orpc/client": "^1.13.6",
     "@orpc/json-schema": "^1.13.6",
@@ -43,7 +44,6 @@
     "@tanstack/react-table": "latest",
     "@tanstack/store": "latest",
     "better-auth": "^1.5.3",
-    "better-sqlite3": "^12.6.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-kit": "^0.31.9",
@@ -66,7 +66,6 @@
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
     "@tanstack/router-cli": "^1.132.0",
-    "@types/better-sqlite3": "^7.6.0",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -85,8 +84,7 @@
       "esbuild",
       "lightningcss",
       "sharp",
-      "workerd",
-      "better-sqlite3"
+      "workerd"
     ]
   }
 }

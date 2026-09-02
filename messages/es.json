@@ -1,0 +1,9 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "home_page": "Inicio",
+  "about_page": "Acerca de",
+  "example_message": "Bienvenido a Extin Safe.",
+  "language_label": "Idioma",
+  "current_locale": "Idioma actual: {locale}",
+  "learn_router": "Conocer TanStack Router"
+}
