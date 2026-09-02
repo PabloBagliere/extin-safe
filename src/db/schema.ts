@@ -34,11 +34,138 @@ export const session = sqliteTable(
     updatedAt: timestamp('updated_at'),
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),
+    activeOrganizationId: text('active_organization_id'),
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
   },
   (table) => [index('session_user_id_idx').on(table.userId)],
+)
+
+export const organizations = sqliteTable(
+  'organizations',
+  {
+    id: text('id').primaryKey(),
+    type: text('type', { enum: ['client', 'maintenance_company'] }).notNull(),
+    name: text('name').notNull(),
+    taxId: text('tax_id'),
+    contactEmail: text('contact_email'),
+    contactPhone: text('contact_phone'),
+    address: text('address'),
+    isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [index('organizations_type_idx').on(table.type)],
+)
+
+export const organizationMembers = sqliteTable(
+  'organization_members',
+  {
+    id: text('id').primaryKey(),
+    organizationId: text('organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    role: text('role', {
+      enum: [
+        'client_admin',
+        'client_operator',
+        'maintenance_admin',
+        'technician',
+      ],
+    }).notNull(),
+    status: text('status', { enum: ['active', 'pending', 'revoked'] })
+      .notNull()
+      .default('active'),
+    invitedByUserId: text('invited_by_user_id').references(() => user.id, {
+      onDelete: 'set null',
+    }),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    index('organization_members_user_id_idx').on(table.userId),
+    uniqueIndex('organization_members_organization_user_idx').on(
+      table.organizationId,
+      table.userId,
+    ),
+  ],
+)
+
+export const organizationMemberInvitations = sqliteTable(
+  'organization_member_invitations',
+  {
+    id: text('id').primaryKey(),
+    organizationId: text('organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    email: text('email').notNull(),
+    role: text('role', {
+      enum: [
+        'client_admin',
+        'client_operator',
+        'maintenance_admin',
+        'technician',
+      ],
+    }).notNull(),
+    status: text('status', { enum: ['pending', 'accepted', 'revoked'] })
+      .notNull()
+      .default('pending'),
+    invitedByUserId: text('invited_by_user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
+    acceptedAt: integer('accepted_at', { mode: 'timestamp' }),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    index('organization_member_invitations_email_idx').on(table.email),
+    index('organization_member_invitations_organization_idx').on(
+      table.organizationId,
+    ),
+  ],
+)
+
+export const maintenanceRelationships = sqliteTable(
+  'maintenance_relationships',
+  {
+    id: text('id').primaryKey(),
+    clientOrganizationId: text('client_organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    maintenanceOrganizationId: text('maintenance_organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    status: text('status', {
+      enum: ['pending', 'accepted', 'rejected', 'ended'],
+    })
+      .notNull()
+      .default('pending'),
+    initiatedByOrganizationId: text('initiated_by_organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    invitationEmail: text('invitation_email'),
+    acceptedAt: integer('accepted_at', { mode: 'timestamp' }),
+    endedAt: integer('ended_at', { mode: 'timestamp' }),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    index('maintenance_relationships_client_idx').on(
+      table.clientOrganizationId,
+    ),
+    index('maintenance_relationships_maintenance_idx').on(
+      table.maintenanceOrganizationId,
+    ),
+    uniqueIndex('maintenance_relationships_pair_idx').on(
+      table.clientOrganizationId,
+      table.maintenanceOrganizationId,
+    ),
+  ],
 )
 
 export const account = sqliteTable(

@@ -8,6 +8,13 @@
       "when": 1788391428540,
       "tag": "0000_brown_ikaris",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788391680510,
+      "tag": "0001_handy_cloak",
+      "breakpoints": true
     }
   ]
 }
