@@ -11,7 +11,6 @@ import {
   session,
   user,
 } from '#/db/schema'
-import { getActiveOrganizationId, requireSession } from '#/lib/auth.functions'
 import {
   defaultRoleForOrganization,
   isRoleAllowedForOrganization,
@@ -33,6 +32,8 @@ function organizationSlug(name: string) {
 }
 
 async function activeMembership() {
+  const { getActiveOrganizationId, requireSession } =
+    await import('#/lib/auth.server')
   const currentSession = await requireSession()
   const organizationId = await getActiveOrganizationId(
     currentSession.session.id,
@@ -52,6 +53,8 @@ async function activeMembership() {
 
 export const listMyOrganizations = createServerFn({ method: 'GET' }).handler(
   async () => {
+    const { getActiveOrganizationId, requireSession } =
+      await import('#/lib/auth.server')
     const currentSession = await requireSession()
     const activeOrganizationId = await getActiveOrganizationId(
       currentSession.session.id,
@@ -92,6 +95,7 @@ export const createOrganization = createServerFn({ method: 'POST' })
     }),
   )
   .handler(async ({ data }) => {
+    const { requireSession } = await import('#/lib/auth.server')
     const currentSession = await requireSession()
     const organizationId = crypto.randomUUID()
     const now = new Date()
@@ -128,6 +132,7 @@ export const createOrganization = createServerFn({ method: 'POST' })
 export const setActiveOrganization = createServerFn({ method: 'POST' })
   .validator(z.object({ organizationId: z.string().uuid() }))
   .handler(async ({ data }) => {
+    const { requireSession } = await import('#/lib/auth.server')
     const currentSession = await requireSession()
     await requireActiveMembership(currentSession.user.id, data.organizationId)
 
@@ -178,6 +183,7 @@ export const acceptOrganizationMemberInvitation = createServerFn({
 })
   .validator(z.object({ invitationId: z.string().uuid() }))
   .handler(async ({ data }) => {
+    const { requireSession } = await import('#/lib/auth.server')
     const currentSession = await requireSession()
     const invitations = await db
       .select()

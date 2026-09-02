@@ -10,7 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as IniciarSesionRouteImport } from './routes/iniciar-sesion'
+import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppConfiguracionRouteImport } from './routes/app/configuracion'
+import { Route as AppOnboardingRouteImport } from './routes/app/onboarding'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 
@@ -19,10 +25,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IniciarSesionRoute = IniciarSesionRouteImport.update({
+  id: '/iniciar-sesion',
+  path: '/iniciar-sesion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConfiguracionRoute = AppConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -37,33 +73,83 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/iniciar-sesion': typeof IniciarSesionRoute
+  '/registro': typeof RegistroRoute
   '/api/$': typeof ApiSplatRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/iniciar-sesion': typeof IniciarSesionRoute
+  '/registro': typeof RegistroRoute
   '/api/$': typeof ApiSplatRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/iniciar-sesion': typeof IniciarSesionRoute
+  '/registro': typeof RegistroRoute
   '/api/$': typeof ApiSplatRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/$' | '/api/auth/$' | '/api/rpc/$'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/iniciar-sesion'
+    | '/registro'
+    | '/api/$'
+    | '/app/configuracion'
+    | '/app/onboarding'
+    | '/app/'
+    | '/api/auth/$'
+    | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/$' | '/api/auth/$' | '/api/rpc/$'
-  id: '__root__' | '/' | '/api/$' | '/api/auth/$' | '/api/rpc/$'
+  to:
+    | '/'
+    | '/iniciar-sesion'
+    | '/registro'
+    | '/api/$'
+    | '/app/configuracion'
+    | '/app/onboarding'
+    | '/app'
+    | '/api/auth/$'
+    | '/api/rpc/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/iniciar-sesion'
+    | '/registro'
+    | '/api/$'
+    | '/app/configuracion'
+    | '/app/onboarding'
+    | '/app/'
+    | '/api/auth/$'
+    | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  IniciarSesionRoute: typeof IniciarSesionRoute
+  RegistroRoute: typeof RegistroRoute
   ApiSplatRoute: typeof ApiSplatRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
@@ -78,12 +164,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iniciar-sesion': {
+      id: '/iniciar-sesion'
+      path: '/iniciar-sesion'
+      fullPath: '/iniciar-sesion'
+      preLoaderRoute: typeof IniciarSesionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/$': {
       id: '/api/$'
       path: '/api/$'
       fullPath: '/api/$'
       preLoaderRoute: typeof ApiSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/configuracion': {
+      id: '/app/configuracion'
+      path: '/configuracion'
+      fullPath: '/app/configuracion'
+      preLoaderRoute: typeof AppConfiguracionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/onboarding': {
+      id: '/app/onboarding'
+      path: '/onboarding'
+      fullPath: '/app/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -102,8 +230,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppRouteChildren {
+  AppConfiguracionRoute: typeof AppConfiguracionRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppConfiguracionRoute: AppConfiguracionRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  IniciarSesionRoute: IniciarSesionRoute,
+  RegistroRoute: RegistroRoute,
   ApiSplatRoute: ApiSplatRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
