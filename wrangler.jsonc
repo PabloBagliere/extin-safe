@@ -14,7 +14,7 @@
     {
       "binding": "DB",
       "database_name": "extin-safe-dev",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "c859cfb3-2abb-4fe8-9513-376471086a95",
       "migrations_dir": "drizzle",
     },
   ],
@@ -33,7 +33,7 @@
         {
           "binding": "DB",
           "database_name": "extin-safe-production",
-          "database_id": "00000000-0000-0000-0000-000000000000",
+          "database_id": "6cc2a598-b42a-4bb2-8797-971ddc3abd38",
           "migrations_dir": "drizzle",
         },
       ],
