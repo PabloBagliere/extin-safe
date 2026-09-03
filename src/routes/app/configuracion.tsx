@@ -125,7 +125,7 @@ function ConfigurationPage() {
                 ))}
               </select>
             </label>
-            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white">
+            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-[var(--button-primary-text)]">
               Invitar integrante
             </button>
           </form>
@@ -146,7 +146,7 @@ function ConfigurationPage() {
                 required
               />
             </label>
-            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white">
+            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-[var(--button-primary-text)]">
               Solicitar vínculo
             </button>
           </form>
@@ -178,7 +178,7 @@ function ConfigurationPage() {
                   {canRespond ? (
                     <div className="mt-3 flex gap-2">
                       <button
-                        className="rounded-md bg-[var(--palm)] px-3 py-1.5 font-semibold text-white"
+                        className="rounded-md bg-[var(--palm)] px-3 py-1.5 font-semibold text-[var(--button-primary-text)]"
                         onClick={() => {
                           void respondToMaintenanceRelationship({
                             data: {

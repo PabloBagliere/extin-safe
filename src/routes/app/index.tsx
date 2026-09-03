@@ -40,7 +40,7 @@ function Dashboard() {
         {isAdmin ? (
           <Link
             to="/app/configuracion"
-            className="mt-6 inline-block rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-white no-underline"
+            className="mt-6 inline-block rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-[var(--button-primary-text)] no-underline"
           >
             Administrar equipo y vínculos
           </Link>
