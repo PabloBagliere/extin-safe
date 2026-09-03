@@ -127,7 +127,7 @@ function ConfigurationPage() {
                 ))}
               </select>
             </label>
-            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white hover:bg-[#8f1c14] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] dark:text-[#271310] dark:hover:bg-[#dc5b45]">
+            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#9a3412] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)]">
               Invitar integrante
             </button>
           </form>
@@ -148,7 +148,7 @@ function ConfigurationPage() {
                 required
               />
             </label>
-            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white hover:bg-[#8f1c14] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] dark:text-[#271310] dark:hover:bg-[#dc5b45]">
+            <button className="rounded-lg bg-[var(--palm)] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#9a3412] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)]">
               Solicitar vínculo
             </button>
           </form>
@@ -180,7 +180,7 @@ function ConfigurationPage() {
                   {canRespond ? (
                     <div className="mt-3 flex gap-2">
                       <button
-                        className="rounded-md bg-[var(--palm)] px-3 py-1.5 font-semibold text-white hover:bg-[#8f1c14] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] dark:text-[#271310] dark:hover:bg-[#dc5b45]"
+                        className="rounded-md bg-[var(--palm)] px-3 py-1.5 font-semibold text-white transition-colors hover:bg-[#9a3412] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)]"
                         onClick={() => {
                           void respondToMaintenanceRelationship({
                             data: {

@@ -1,29 +1,29 @@
 @import 'tailwindcss';
 
 :root {
-  --sea-ink: #22262b;
-  --sea-ink-soft: #5e6269;
-  --lagoon: #dd5a43;
-  --lagoon-deep: #a93a2b;
-  --palm: #b42318;
-  --surface: rgba(255, 255, 255, 0.74);
-  --surface-strong: rgba(255, 255, 255, 0.9);
-  --line: rgba(34, 38, 43, 0.14);
+  --sea-ink: #102a43;
+  --sea-ink-soft: #52637a;
+  --lagoon: #fb923c;
+  --lagoon-deep: #c2410c;
+  --palm: #c2410c;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-strong: #ffffff;
+  --line: rgba(16, 42, 67, 0.14);
   --inset-glint: rgba(255, 255, 255, 0.82);
-  --kicker: rgba(169, 58, 43, 0.9);
-  --bg-base: #f2e2d8;
+  --kicker: #c2410c;
+  --bg-base: #edf3f8;
 }
 
 .dark {
-  --sea-ink: #f8e9e2;
-  --sea-ink-soft: #d8beb4;
-  --lagoon: #ff9078;
-  --lagoon-deep: #ffb09e;
-  --palm: #f07158;
-  --surface: rgba(33, 23, 23, 0.82);
-  --surface-strong: rgba(29, 20, 20, 0.94);
-  --line: rgba(255, 176, 158, 0.2);
-  --inset-glint: rgba(255, 224, 214, 0.14);
-  --kicker: #ffc0b0;
-  --bg-base: #130e0e;
+  --sea-ink: #e8f1fa;
+  --sea-ink-soft: #b2c2d2;
+  --lagoon: #fb923c;
+  --lagoon-deep: #fdba74;
+  --palm: #ea580c;
+  --surface: rgba(20, 42, 65, 0.9);
+  --surface-strong: #102a43;
+  --line: rgba(178, 194, 210, 0.24);
+  --inset-glint: rgba(232, 241, 250, 0.12);
+  --kicker: #fdba74;
+  --bg-base: #081b2c;
 }

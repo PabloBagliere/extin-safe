@@ -85,7 +85,7 @@ function RegisterPage() {
         </fieldset>
         {error ? <p className="mt-4 text-sm text-red-700">{error}</p> : null}
         <button
-          className="mt-6 w-full rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-white hover:bg-[#8f1c14] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] disabled:opacity-60 dark:text-[#271310] dark:hover:bg-[#dc5b45]"
+          className="mt-6 w-full rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-white shadow-[0_8px_18px_rgba(194,65,12,0.28)] transition-colors hover:bg-[#9a3412] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] disabled:opacity-60"
           type="submit"
           disabled={isSubmitting}
         >
