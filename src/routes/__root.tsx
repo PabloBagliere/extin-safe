@@ -56,7 +56,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-screen overflow-x-hidden bg-[var(--bg-base)] font-sans text-[var(--sea-ink)] antialiased">
         {children}
         <TanStackDevtools
           config={{

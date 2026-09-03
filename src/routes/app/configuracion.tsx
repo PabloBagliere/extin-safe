@@ -88,12 +88,14 @@ function ConfigurationPage() {
       <Link to="/app" className="text-sm font-semibold">
         Volver al inicio
       </Link>
-      <h1 className="display-title mt-4 text-4xl font-bold">Configuración</h1>
+      <h1 className="mt-4 font-[Fraunces,Georgia,serif] text-4xl font-bold">
+        Configuración
+      </h1>
       {statusMessage ? (
         <p className="mt-3 text-sm text-[var(--palm)]">{statusMessage}</p>
       ) : null}
       <section className="mt-6 grid gap-6 lg:grid-cols-2">
-        <article className="island-shell rounded-2xl p-6">
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm">
           <h2 className="text-xl font-bold">Integrantes</h2>
           <ul className="mt-4 grid gap-2 text-sm">
             {workspace.members.map((member) => (
@@ -130,7 +132,7 @@ function ConfigurationPage() {
             </button>
           </form>
         </article>
-        <article className="island-shell rounded-2xl p-6">
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm">
           <h2 className="text-xl font-bold">Empresa o cliente vinculado</h2>
           <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
             Ingresá el identificador de la organización complementaria. La otra

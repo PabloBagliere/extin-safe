@@ -24,13 +24,13 @@ function Dashboard() {
 
   return (
     <main className="py-8">
-      <section className="island-shell rounded-3xl p-7 md:p-10">
-        <p className="island-kicker">
+      <section className="rounded-3xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-7 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm md:p-10">
+        <p className="text-[0.69rem] font-bold uppercase tracking-[0.16em] text-[var(--kicker)]">
           {workspace.organization.type === 'client'
             ? 'Cliente'
             : 'Empresa de mantenimiento'}
         </p>
-        <h1 className="display-title mt-3 text-4xl font-bold">
+        <h1 className="mt-3 font-[Fraunces,Georgia,serif] text-4xl font-bold">
           {workspace.organization.name}
         </h1>
         <p className="mt-3 text-[var(--sea-ink-soft)]">
@@ -47,13 +47,13 @@ function Dashboard() {
         ) : null}
       </section>
       <section className="mt-6 grid gap-4 md:grid-cols-2">
-        <article className="feature-card rounded-2xl border border-[var(--line)] p-6">
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
           <h2 className="text-lg font-bold">Equipo</h2>
           <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
             {workspace.members.length} integrante(s) con acceso activo.
           </p>
         </article>
-        <article className="feature-card rounded-2xl border border-[var(--line)] p-6">
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
           <h2 className="text-lg font-bold">Vínculos de mantenimiento</h2>
           <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
             {workspace.relationships.length} vínculo(s) registrado(s).

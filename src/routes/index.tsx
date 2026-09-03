@@ -4,10 +4,12 @@ export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
   return (
-    <main className="page-wrap flex min-h-screen items-center py-12">
-      <section className="island-shell w-full rounded-3xl p-8 md:p-14">
-        <p className="island-kicker">Control de extintores</p>
-        <h1 className="display-title mt-4 max-w-3xl text-5xl font-bold tracking-tight md:text-7xl">
+    <main className="mx-auto flex min-h-screen w-[calc(100%-2rem)] max-w-[1080px] items-center py-12">
+      <section className="w-full rounded-3xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-8 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm md:p-14">
+        <p className="text-[0.69rem] font-bold uppercase tracking-[0.16em] text-[var(--kicker)]">
+          Control de extintores
+        </p>
+        <h1 className="mt-4 max-w-3xl font-[Fraunces,Georgia,serif] text-5xl font-bold tracking-tight md:text-7xl">
           Tu seguridad, organizada.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--sea-ink-soft)]">

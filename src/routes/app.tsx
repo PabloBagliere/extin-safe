@@ -19,11 +19,11 @@ function AppLayout() {
   const user = Route.useRouteContext({ select: (context) => context.user })
 
   return (
-    <div className="page-wrap min-h-screen py-5">
-      <header className="island-shell flex flex-wrap items-center justify-between gap-4 rounded-2xl px-5 py-4">
+    <div className="mx-auto min-h-screen w-[calc(100%-2rem)] max-w-[1080px] py-5">
+      <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] px-5 py-4 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm">
         <Link
           to="/app"
-          className="display-title text-2xl font-bold no-underline"
+          className="font-[Fraunces,Georgia,serif] text-2xl font-bold no-underline"
         >
           Extin Safe
         </Link>

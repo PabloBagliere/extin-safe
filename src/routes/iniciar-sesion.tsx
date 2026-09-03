@@ -34,13 +34,15 @@ function SignInPage() {
   }
 
   return (
-    <main className="page-wrap flex min-h-screen items-center py-10">
+    <main className="mx-auto flex min-h-screen w-[calc(100%-2rem)] max-w-[1080px] items-center py-10">
       <form
-        className="island-shell mx-auto w-full max-w-lg rounded-3xl p-7 md:p-10"
+        className="mx-auto w-full max-w-lg rounded-3xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-7 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm md:p-10"
         onSubmit={handleSubmit}
       >
-        <p className="island-kicker">Área privada</p>
-        <h1 className="display-title mt-3 text-4xl font-bold">
+        <p className="text-[0.69rem] font-bold uppercase tracking-[0.16em] text-[var(--kicker)]">
+          Área privada
+        </p>
+        <h1 className="mt-3 font-[Fraunces,Georgia,serif] text-4xl font-bold">
           Iniciar sesión
         </h1>
         <fieldset className="mt-7 grid gap-4" disabled={isSubmitting}>

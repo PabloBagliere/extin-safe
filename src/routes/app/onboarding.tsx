@@ -50,11 +50,13 @@ function OnboardingPage() {
   return (
     <main className="mx-auto max-w-2xl py-10">
       <form
-        className="island-shell rounded-3xl p-7 md:p-10"
+        className="rounded-3xl border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-7 shadow-[inset_0_1px_0_var(--inset-glint),0_22px_44px_rgba(137,41,29,0.12),0_6px_18px_rgba(34,38,43,0.08)] backdrop-blur-sm md:p-10"
         onSubmit={handleSubmit}
       >
-        <p className="island-kicker">Configuración inicial</p>
-        <h1 className="display-title mt-3 text-4xl font-bold">
+        <p className="text-[0.69rem] font-bold uppercase tracking-[0.16em] text-[var(--kicker)]">
+          Configuración inicial
+        </p>
+        <h1 className="mt-3 font-[Fraunces,Georgia,serif] text-4xl font-bold">
           Tu organización
         </h1>
         <p className="mt-3 text-[var(--sea-ink-soft)]">
