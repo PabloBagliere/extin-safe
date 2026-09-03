@@ -1,4 +1,10 @@
-import { Link, Outlet, createFileRoute, redirect } from '@tanstack/react-router'
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  redirect,
+  useNavigate,
+} from '@tanstack/react-router'
 
 import { authClient } from '#/lib/auth-client'
 import { getCurrentSession } from '#/lib/auth.functions'
@@ -17,6 +23,12 @@ export const Route = createFileRoute('/app')({
 
 function AppLayout() {
   const user = Route.useRouteContext({ select: (context) => context.user })
+  const navigate = useNavigate()
+
+  async function handleSignOut() {
+    await authClient.signOut()
+    await navigate({ to: '/' })
+  }
 
   return (
     <div className="mx-auto min-h-screen w-[calc(100%-2rem)] max-w-[1080px] py-5">
@@ -30,9 +42,9 @@ function AppLayout() {
         <div className="flex items-center gap-3 text-sm">
           <span className="text-[var(--sea-ink-soft)]">{user.email}</span>
           <button
-            className="rounded-lg border border-[var(--line)] px-3 py-1.5 font-semibold"
+            className="cursor-pointer rounded-lg border border-[var(--line)] px-3 py-1.5 font-semibold transition-colors hover:bg-white"
             onClick={() => {
-              void authClient.signOut()
+              void handleSignOut()
             }}
           >
             Salir
