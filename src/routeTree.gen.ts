@@ -19,6 +19,9 @@ import { Route as AppConfiguracionRouteImport } from './routes/app/configuracion
 import { Route as AppOnboardingRouteImport } from './routes/app/onboarding'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as AppEstablecimientosIndexRouteImport } from './routes/app/establecimientos/index'
+import { Route as AppEstablecimientosEstablishmentIdRouteImport } from './routes/app/establecimientos/$establishmentId'
+import { Route as AppExtintoresExtinguisherIdRouteImport } from './routes/app/extintores/$extinguisherId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +73,24 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   path: '/api/rpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppEstablecimientosIndexRoute =
+  AppEstablecimientosIndexRouteImport.update({
+    id: '/establecimientos/',
+    path: '/establecimientos/',
+    getParentRoute: () => AppRoute,
+  } as any)
+const AppEstablecimientosEstablishmentIdRoute =
+  AppEstablecimientosEstablishmentIdRouteImport.update({
+    id: '/establecimientos/$establishmentId',
+    path: '/establecimientos/$establishmentId',
+    getParentRoute: () => AppRoute,
+  } as any)
+const AppExtintoresExtinguisherIdRoute =
+  AppExtintoresExtinguisherIdRouteImport.update({
+    id: '/extintores/$extinguisherId',
+    path: '/extintores/$extinguisherId',
+    getParentRoute: () => AppRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +103,9 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/app/establecimientos/$establishmentId': typeof AppEstablecimientosEstablishmentIdRoute
+  '/app/extintores/$extinguisherId': typeof AppExtintoresExtinguisherIdRoute
+  '/app/establecimientos/': typeof AppEstablecimientosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -93,6 +117,9 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/app/establecimientos/$establishmentId': typeof AppEstablecimientosEstablishmentIdRoute
+  '/app/extintores/$extinguisherId': typeof AppExtintoresExtinguisherIdRoute
+  '/app/establecimientos': typeof AppEstablecimientosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,6 +133,9 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/app/establecimientos/$establishmentId': typeof AppEstablecimientosEstablishmentIdRoute
+  '/app/extintores/$extinguisherId': typeof AppExtintoresExtinguisherIdRoute
+  '/app/establecimientos/': typeof AppEstablecimientosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,6 +150,9 @@ export interface FileRouteTypes {
     | '/app/'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/app/establecimientos/$establishmentId'
+    | '/app/extintores/$extinguisherId'
+    | '/app/establecimientos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,6 +164,9 @@ export interface FileRouteTypes {
     | '/app'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/app/establecimientos/$establishmentId'
+    | '/app/extintores/$extinguisherId'
+    | '/app/establecimientos'
   id:
     | '__root__'
     | '/'
@@ -143,6 +179,9 @@ export interface FileRouteTypes {
     | '/app/'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/app/establecimientos/$establishmentId'
+    | '/app/extintores/$extinguisherId'
+    | '/app/establecimientos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -227,6 +266,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/establecimientos/': {
+      id: '/app/establecimientos/'
+      path: '/establecimientos'
+      fullPath: '/app/establecimientos/'
+      preLoaderRoute: typeof AppEstablecimientosIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/establecimientos/$establishmentId': {
+      id: '/app/establecimientos/$establishmentId'
+      path: '/establecimientos/$establishmentId'
+      fullPath: '/app/establecimientos/$establishmentId'
+      preLoaderRoute: typeof AppEstablecimientosEstablishmentIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/extintores/$extinguisherId': {
+      id: '/app/extintores/$extinguisherId'
+      path: '/extintores/$extinguisherId'
+      fullPath: '/app/extintores/$extinguisherId'
+      preLoaderRoute: typeof AppExtintoresExtinguisherIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -234,12 +294,19 @@ interface AppRouteChildren {
   AppConfiguracionRoute: typeof AppConfiguracionRoute
   AppOnboardingRoute: typeof AppOnboardingRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppEstablecimientosEstablishmentIdRoute: typeof AppEstablecimientosEstablishmentIdRoute
+  AppExtintoresExtinguisherIdRoute: typeof AppExtintoresExtinguisherIdRoute
+  AppEstablecimientosIndexRoute: typeof AppEstablecimientosIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppConfiguracionRoute: AppConfiguracionRoute,
   AppOnboardingRoute: AppOnboardingRoute,
   AppIndexRoute: AppIndexRoute,
+  AppEstablecimientosEstablishmentIdRoute:
+    AppEstablecimientosEstablishmentIdRoute,
+  AppExtintoresExtinguisherIdRoute: AppExtintoresExtinguisherIdRoute,
+  AppEstablecimientosIndexRoute: AppEstablecimientosIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

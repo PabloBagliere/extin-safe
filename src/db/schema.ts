@@ -168,6 +168,166 @@ export const maintenanceRelationships = sqliteTable(
   ],
 )
 
+export const establishments = sqliteTable(
+  'establishments',
+  {
+    id: text('id').primaryKey(),
+    clientOrganizationId: text('client_organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    name: text('name').notNull(),
+    contactName: text('contact_name'),
+    contactEmail: text('contact_email'),
+    contactPhone: text('contact_phone'),
+    addressLine: text('address_line').notNull(),
+    city: text('city').notNull(),
+    province: text('province').notNull(),
+    postalCode: text('postal_code'),
+    archivedAt: integer('archived_at', { mode: 'timestamp' }),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    index('establishments_client_archived_idx').on(
+      table.clientOrganizationId,
+      table.archivedAt,
+    ),
+  ],
+)
+
+export const establishmentMaintenanceAssignments = sqliteTable(
+  'establishment_maintenance_assignments',
+  {
+    id: text('id').primaryKey(),
+    establishmentId: text('establishment_id')
+      .notNull()
+      .references(() => establishments.id, { onDelete: 'cascade' }),
+    maintenanceRelationshipId: text('maintenance_relationship_id')
+      .notNull()
+      .references(() => maintenanceRelationships.id, { onDelete: 'cascade' }),
+    startsOn: text('starts_on').notNull(),
+    endsOn: text('ends_on'),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    index('establishment_assignments_establishment_idx').on(
+      table.establishmentId,
+      table.endsOn,
+    ),
+  ],
+)
+
+export const extinguishers = sqliteTable(
+  'extinguishers',
+  {
+    id: text('id').primaryKey(),
+    establishmentId: text('establishment_id')
+      .notNull()
+      .references(() => establishments.id, { onDelete: 'cascade' }),
+    code: text('code').notNull(),
+    type: text('type').notNull(),
+    fireClasses: text('fire_classes').notNull(),
+    capacityValue: integer('capacity_value').notNull(),
+    capacityUnit: text('capacity_unit', {
+      enum: ['kg', 'l', 'other'],
+    }).notNull(),
+    brand: text('brand'),
+    serialNumber: text('serial_number'),
+    locationDescription: text('location_description').notNull(),
+    lastControlOn: text('last_control_on'),
+    nextControlDueOn: text('next_control_due_on'),
+    operationalStatus: text('operational_status', {
+      enum: ['active', 'attention_required', 'out_of_service'],
+    })
+      .notNull()
+      .default('active'),
+    notes: text('notes'),
+    archivedAt: integer('archived_at', { mode: 'timestamp' }),
+    createdAt: timestamp('created_at'),
+    updatedAt: timestamp('updated_at'),
+  },
+  (table) => [
+    uniqueIndex('extinguishers_establishment_code_idx').on(
+      table.establishmentId,
+      table.code,
+    ),
+    uniqueIndex('extinguishers_establishment_serial_idx').on(
+      table.establishmentId,
+      table.serialNumber,
+    ),
+    index('extinguishers_establishment_archived_idx').on(
+      table.establishmentId,
+      table.archivedAt,
+    ),
+    index('extinguishers_next_control_due_idx').on(table.nextControlDueOn),
+  ],
+)
+
+export const maintenanceEvents = sqliteTable(
+  'maintenance_events',
+  {
+    id: text('id').primaryKey(),
+    extinguisherId: text('extinguisher_id')
+      .notNull()
+      .references(() => extinguishers.id, { onDelete: 'cascade' }),
+    maintenanceOrganizationId: text('maintenance_organization_id').references(
+      () => organizations.id,
+      { onDelete: 'set null' },
+    ),
+    performedByUserId: text('performed_by_user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'restrict' }),
+    eventType: text('event_type', {
+      enum: [
+        'control',
+        'recharge',
+        'repair',
+        'installation',
+        'replacement',
+        'decommission',
+      ],
+    }).notNull(),
+    performedOn: text('performed_on').notNull(),
+    resultingOperationalStatus: text('resulting_operational_status', {
+      enum: ['active', 'attention_required', 'out_of_service'],
+    }).notNull(),
+    resultingNextControlDueOn: text('resulting_next_control_due_on'),
+    notes: text('notes'),
+    createdAt: timestamp('created_at'),
+  },
+  (table) => [
+    index('maintenance_events_extinguisher_performed_idx').on(
+      table.extinguisherId,
+      table.performedOn,
+    ),
+  ],
+)
+
+export const auditLog = sqliteTable(
+  'audit_log',
+  {
+    id: text('id').primaryKey(),
+    organizationId: text('organization_id')
+      .notNull()
+      .references(() => organizations.id, { onDelete: 'cascade' }),
+    actorUserId: text('actor_user_id').references(() => user.id, {
+      onDelete: 'set null',
+    }),
+    action: text('action').notNull(),
+    entityType: text('entity_type').notNull(),
+    entityId: text('entity_id').notNull(),
+    metadata: text('metadata'),
+    createdAt: timestamp('created_at'),
+  },
+  (table) => [
+    index('audit_log_organization_created_idx').on(
+      table.organizationId,
+      table.createdAt,
+    ),
+  ],
+)
+
 export const account = sqliteTable(
   'account',
   {

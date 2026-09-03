@@ -4,6 +4,7 @@ import {
   getOrganizationWorkspace,
   listMyOrganizations,
 } from '#/lib/organizations.functions'
+import { getDashboard } from '#/lib/inventory.functions'
 
 export const Route = createFileRoute('/app/')({
   beforeLoad: async () => {
@@ -12,12 +13,18 @@ export const Route = createFileRoute('/app/')({
       throw redirect({ to: '/app/onboarding' })
     }
   },
-  loader: () => getOrganizationWorkspace(),
+  loader: async () => {
+    const [workspace, dashboard] = await Promise.all([
+      getOrganizationWorkspace(),
+      getDashboard(),
+    ])
+    return { workspace, dashboard }
+  },
   component: Dashboard,
 })
 
 function Dashboard() {
-  const workspace = Route.useLoaderData()
+  const { workspace, dashboard } = Route.useLoaderData()
   const isAdmin =
     workspace.organization.role === 'client_admin' ||
     workspace.organization.role === 'maintenance_admin'
@@ -34,8 +41,7 @@ function Dashboard() {
           {workspace.organization.name}
         </h1>
         <p className="mt-3 text-[var(--sea-ink-soft)]">
-          Organización activa. El inventario y los establecimientos se
-          incorporarán en la próxima fase.
+          Controlá el estado del inventario y los próximos vencimientos.
         </p>
         {isAdmin ? (
           <Link
@@ -46,18 +52,62 @@ function Dashboard() {
           </Link>
         ) : null}
       </section>
-      <section className="mt-6 grid gap-4 md:grid-cols-2">
-        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
-          <h2 className="text-lg font-bold">Equipo</h2>
-          <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
-            {workspace.members.length} integrante(s) con acceso activo.
+      <section className="mt-6 grid gap-4 md:grid-cols-4">
+        <article className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5">
+          <p className="text-sm text-[var(--sea-ink-soft)]">Equipos activos</p>
+          <p className="mt-2 text-3xl font-bold">{dashboard.counts.total}</p>
+        </article>
+        <article className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5">
+          <p className="text-sm text-[var(--sea-ink-soft)]">En regla</p>
+          <p className="mt-2 text-3xl font-bold text-emerald-700">
+            {dashboard.counts.inRule}
           </p>
         </article>
-        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
-          <h2 className="text-lg font-bold">Vínculos de mantenimiento</h2>
-          <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
-            {workspace.relationships.length} vínculo(s) registrado(s).
+        <article className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5">
+          <p className="text-sm text-[var(--sea-ink-soft)]">
+            Próximos a revisión
           </p>
+          <p className="mt-2 text-3xl font-bold text-amber-700">
+            {dashboard.counts.dueSoon}
+          </p>
+        </article>
+        <article className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5">
+          <p className="text-sm text-[var(--sea-ink-soft)]">
+            Vencidos o con atención
+          </p>
+          <p className="mt-2 text-3xl font-bold text-red-700">
+            {dashboard.counts.overdue}
+          </p>
+        </article>
+      </section>
+      <section className="mt-6 grid gap-4 md:grid-cols-2">
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
+          <h2 className="text-lg font-bold">Establecimientos</h2>
+          <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
+            Gestioná sedes e inventario de extintores.
+          </p>
+          <Link
+            to="/app/establecimientos"
+            className="mt-4 inline-block font-semibold"
+          >
+            Abrir establecimientos
+          </Link>
+        </article>
+        <article className="rounded-2xl border border-[var(--line)] bg-[linear-gradient(165deg,color-mix(in_oklab,var(--surface-strong)_93%,white_7%),var(--surface))] p-6 shadow-[inset_0_1px_0_var(--inset-glint),0_18px_34px_rgba(137,41,29,0.1),0_4px_14px_rgba(34,38,43,0.06)] transition-[border-color,transform] hover:-translate-y-0.5 hover:border-[var(--lagoon-deep)]">
+          <h2 className="text-lg font-bold">Atención prioritaria</h2>
+          <p className="mt-2 text-sm text-[var(--sea-ink-soft)]">
+            {dashboard.upcoming.length} equipo(s) requieren seguimiento.
+          </p>
+          {dashboard.upcoming.slice(0, 3).map((item) => (
+            <Link
+              key={item.id}
+              to="/app/extintores/$extinguisherId"
+              params={{ extinguisherId: item.id }}
+              className="mt-2 block text-sm font-semibold"
+            >
+              {item.code} · {item.nextControlDueOn ?? 'Sin fecha'}
+            </Link>
+          ))}
         </article>
       </section>
     </main>
