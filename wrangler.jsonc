@@ -4,45 +4,31 @@
   "compatibility_date": "2026-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "extin-safe.pablobagliere.dev",
+      "custom_domain": true,
+    },
+  ],
   "observability": {
     "enabled": true,
   },
   "vars": {
-    "APP_URL": "http://localhost:3000",
+    "APP_URL": "https://extin-safe.pablobagliere.dev",
   },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "extin-safe-dev",
-      "database_id": "c859cfb3-2abb-4fe8-9513-376471086a95",
+      "database_name": "extin-safe-production",
+      "database_id": "6cc2a598-b42a-4bb2-8797-971ddc3abd38",
       "migrations_dir": "drizzle",
     },
   ],
   "r2_buckets": [
     {
       "binding": "MEDIA",
-      "bucket_name": "extin-safe-media-dev",
+      "bucket_name": "extin-safe-media-production",
     },
   ],
-  "env": {
-    "production": {
-      "vars": {
-        "APP_URL": "https://app.extinsafe.com.ar",
-      },
-      "d1_databases": [
-        {
-          "binding": "DB",
-          "database_name": "extin-safe-production",
-          "database_id": "6cc2a598-b42a-4bb2-8797-971ddc3abd38",
-          "migrations_dir": "drizzle",
-        },
-      ],
-      "r2_buckets": [
-        {
-          "binding": "MEDIA",
-          "bucket_name": "extin-safe-media-production",
-        },
-      ],
-    },
-  },
 }

@@ -7,26 +7,26 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --sea-ink: #173a40;
-  --sea-ink-soft: #416166;
-  --lagoon: #4fb8b2;
-  --lagoon-deep: #328f97;
-  --palm: #2f6a4a;
+  --sea-ink: #22262b;
+  --sea-ink-soft: #5e6269;
+  --lagoon: #dd5a43;
+  --lagoon-deep: #a93a2b;
+  --palm: #b42318;
   --button-primary-text: #ffffff;
-  --sand: #e7f0e8;
-  --foam: #f3faf5;
+  --sand: #f5e9e0;
+  --foam: #fffaf7;
   --surface: rgba(255, 255, 255, 0.74);
   --surface-strong: rgba(255, 255, 255, 0.9);
-  --line: rgba(23, 58, 64, 0.14);
+  --line: rgba(34, 38, 43, 0.14);
   --inset-glint: rgba(255, 255, 255, 0.82);
-  --kicker: rgba(47, 106, 74, 0.9);
-  --bg-base: #e7f3ec;
-  --header-bg: rgba(251, 255, 248, 0.84);
+  --kicker: rgba(169, 58, 43, 0.9);
+  --bg-base: #f2e2d8;
+  --header-bg: rgba(255, 250, 247, 0.84);
   --chip-bg: rgba(255, 255, 255, 0.8);
-  --chip-line: rgba(47, 106, 74, 0.18);
+  --chip-line: rgba(180, 35, 24, 0.18);
   --link-bg-hover: rgba(255, 255, 255, 0.9);
-  --hero-a: rgba(79, 184, 178, 0.36);
-  --hero-b: rgba(47, 106, 74, 0.2);
+  --hero-a: rgba(240, 126, 89, 0.28);
+  --hero-b: rgba(180, 35, 24, 0.16);
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -64,26 +64,26 @@
 }
 
 .dark {
-  --sea-ink: #d7ece8;
-  --sea-ink-soft: #afcdc8;
-  --lagoon: #60d7cf;
-  --lagoon-deep: #8de5db;
-  --palm: #6ec89a;
-  --button-primary-text: #0a1418;
-  --sand: #0f1a1e;
-  --foam: #101d22;
-  --surface: rgba(16, 30, 34, 0.8);
-  --surface-strong: rgba(15, 27, 31, 0.92);
-  --line: rgba(141, 229, 219, 0.18);
-  --inset-glint: rgba(194, 247, 238, 0.14);
-  --kicker: #b8efe5;
-  --bg-base: #0a1418;
-  --header-bg: rgba(10, 20, 24, 0.8);
-  --chip-bg: rgba(13, 28, 32, 0.9);
-  --chip-line: rgba(141, 229, 219, 0.24);
-  --link-bg-hover: rgba(24, 44, 49, 0.8);
-  --hero-a: rgba(96, 215, 207, 0.18);
-  --hero-b: rgba(110, 200, 154, 0.12);
+  --sea-ink: #f8e9e2;
+  --sea-ink-soft: #d8beb4;
+  --lagoon: #ff9078;
+  --lagoon-deep: #ffb09e;
+  --palm: #f07158;
+  --button-primary-text: #271310;
+  --sand: #1c1414;
+  --foam: #211717;
+  --surface: rgba(33, 23, 23, 0.82);
+  --surface-strong: rgba(29, 20, 20, 0.94);
+  --line: rgba(255, 176, 158, 0.2);
+  --inset-glint: rgba(255, 224, 214, 0.14);
+  --kicker: #ffc0b0;
+  --bg-base: #130e0e;
+  --header-bg: rgba(19, 14, 14, 0.82);
+  --chip-bg: rgba(37, 25, 25, 0.9);
+  --chip-line: rgba(255, 176, 158, 0.24);
+  --link-bg-hover: rgba(53, 34, 33, 0.82);
+  --hero-a: rgba(240, 113, 88, 0.18);
+  --hero-b: rgba(255, 144, 120, 0.12);
 
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
@@ -175,7 +175,7 @@ body {
     radial-gradient(1050px 620px at 112% -12%, var(--hero-b), transparent 62%),
     radial-gradient(
       720px 380px at 50% 115%,
-      rgba(79, 184, 178, 0.1),
+      rgba(240, 126, 89, 0.1),
       transparent 68%
     ),
     linear-gradient(
@@ -204,10 +204,10 @@ body::before {
     ),
     radial-gradient(
       circle at 78% 26%,
-      rgba(79, 184, 178, 0.2),
+      rgba(240, 126, 89, 0.2),
       transparent 42%
     ),
-    radial-gradient(circle at 42% 82%, rgba(47, 106, 74, 0.14), transparent 36%);
+    radial-gradient(circle at 42% 82%, rgba(180, 35, 24, 0.14), transparent 36%);
 }
 
 body::after {
@@ -226,13 +226,13 @@ body::after {
 
 a {
   color: var(--lagoon-deep);
-  text-decoration-color: rgba(50, 143, 151, 0.4);
+  text-decoration-color: rgba(169, 58, 43, 0.4);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 
 a:hover {
-  color: #246f76;
+  color: #7e241b;
 }
 
 code {
@@ -273,8 +273,8 @@ pre code {
   background: linear-gradient(165deg, var(--surface-strong), var(--surface));
   box-shadow:
     0 1px 0 var(--inset-glint) inset,
-    0 22px 44px rgba(30, 90, 72, 0.1),
-    0 6px 18px rgba(23, 58, 64, 0.08);
+    0 22px 44px rgba(137, 41, 29, 0.12),
+    0 6px 18px rgba(34, 38, 43, 0.08);
   backdrop-filter: blur(4px);
 }
 
@@ -286,8 +286,8 @@ pre code {
   );
   box-shadow:
     0 1px 0 var(--inset-glint) inset,
-    0 18px 34px rgba(30, 90, 72, 0.1),
-    0 4px 14px rgba(23, 58, 64, 0.06);
+    0 18px 34px rgba(137, 41, 29, 0.1),
+    0 4px 14px rgba(34, 38, 43, 0.06);
 }
 
 .feature-card:hover {
