@@ -67,7 +67,7 @@ function SignInPage() {
         </fieldset>
         {error ? <p className="mt-4 text-sm text-red-700">{error}</p> : null}
         <button
-          className="mt-6 w-full rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-[var(--button-primary-text)] disabled:opacity-60"
+          className="primary-action mt-6 w-full rounded-xl px-5 py-3 font-semibold disabled:opacity-60"
           type="submit"
           disabled={isSubmitting}
         >

@@ -17,7 +17,7 @@ function Home() {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             to="/registro"
-            className="rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-[var(--button-primary-text)] no-underline"
+            className="primary-action rounded-xl px-5 py-3 font-semibold"
           >
             Crear cuenta
           </Link>

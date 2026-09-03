@@ -235,6 +235,22 @@ a:hover {
   color: #7e241b;
 }
 
+.primary-action {
+  background-color: var(--palm);
+  color: var(--button-primary-text);
+  text-decoration: none;
+}
+
+.primary-action:hover {
+  background-color: color-mix(in oklab, var(--palm) 88%, black);
+  color: var(--button-primary-text);
+}
+
+.primary-action:focus-visible {
+  outline: 3px solid var(--lagoon);
+  outline-offset: 3px;
+}
+
 code {
   font-size: 0.9em;
   border: 1px solid var(--line);
