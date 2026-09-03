@@ -112,7 +112,7 @@ function OnboardingPage() {
         </fieldset>
         {error ? <p className="mt-4 text-sm text-red-700">{error}</p> : null}
         <button
-          className="primary-action mt-6 rounded-xl px-5 py-3 font-semibold disabled:opacity-60"
+          className="mt-6 rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-white hover:bg-[#8f1c14] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] disabled:opacity-60 dark:text-[#271310] dark:hover:bg-[#dc5b45]"
           type="submit"
           disabled={isSubmitting}
         >

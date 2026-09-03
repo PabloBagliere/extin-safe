@@ -40,7 +40,7 @@ function Dashboard() {
         {isAdmin ? (
           <Link
             to="/app/configuracion"
-            className="primary-action mt-6 inline-block rounded-xl px-5 py-3 font-semibold"
+            className="mt-6 inline-block rounded-xl bg-[var(--palm)] px-5 py-3 font-semibold text-white no-underline hover:bg-[#8f1c14] hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[var(--lagoon)] dark:text-[#271310] dark:hover:bg-[#dc5b45] dark:hover:text-[#271310]"
           >
             Administrar equipo y vínculos
           </Link>

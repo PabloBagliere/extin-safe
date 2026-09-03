@@ -12,7 +12,6 @@
   --lagoon: #dd5a43;
   --lagoon-deep: #a93a2b;
   --palm: #b42318;
-  --button-primary-text: #ffffff;
   --sand: #f5e9e0;
   --foam: #fffaf7;
   --surface: rgba(255, 255, 255, 0.74);
@@ -69,7 +68,6 @@
   --lagoon: #ff9078;
   --lagoon-deep: #ffb09e;
   --palm: #f07158;
-  --button-primary-text: #271310;
   --sand: #1c1414;
   --foam: #211717;
   --surface: rgba(33, 23, 23, 0.82);
@@ -222,33 +220,6 @@ body::after {
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: radial-gradient(circle at 50% 30%, black, transparent 78%);
-}
-
-a {
-  color: var(--lagoon-deep);
-  text-decoration-color: rgba(169, 58, 43, 0.4);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-a:hover {
-  color: #7e241b;
-}
-
-.primary-action {
-  background-color: var(--palm);
-  color: var(--button-primary-text);
-  text-decoration: none;
-}
-
-.primary-action:hover {
-  background-color: color-mix(in oklab, var(--palm) 88%, black);
-  color: var(--button-primary-text);
-}
-
-.primary-action:focus-visible {
-  outline: 3px solid var(--lagoon);
-  outline-offset: 3px;
 }
 
 code {
